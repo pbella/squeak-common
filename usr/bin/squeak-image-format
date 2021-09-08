@@ -1,0 +1,70 @@
+#!/usr/bin/python3
+# squeak-image-format: Print the image format number on standard output 
+# for use in a shell script to test image format requirements.
+# A non-zero return status code indicates failure.
+#
+# No value in optimizing this, keep it easy to read
+
+import sys
+
+if len(sys.argv)!=2:
+	sys.exit('usage: '+sys.argv[0]+' imageFileName')
+
+# commented out variants are redundant
+image_types = {
+	tuple([0,0,25,102]): '6502',
+	tuple([0,0,0,0,0,0,25,102]): '6502',
+	tuple([102,25,0,0]): '6502',
+	#tuple([102,25,0,0,0,0,0,0]): '6502',
+	tuple([0,0,25,104]): '6504',
+	tuple([0,0,0,0,0,0,25,104]): '6504',
+	tuple([104,25,0,0]): '6504',
+	#tuple([104,25,0,0,0,0,0,0]): '6504',
+	tuple([0,0,25,105]): '6505',
+	tuple([0,0,0,0,0,0,25,105]): '6505',
+	tuple([105,25,0,0]): '6505',
+	#tuple([105,25,0,0,0,0,0,0]): '6505',
+	tuple([0,0,25,121]): '6521',
+	tuple([121,25,0,0]): '6521',
+	tuple([0,0,27,121]): '7033',
+	tuple([121,27,0,0]): '7033',
+	tuple([0,1,9,160]): '68000',
+	tuple([0,0,0,0,0,1,9,160]): '68000',
+	tuple([160,9,1,0]): '68000',
+	#tuple([160,9,1,0,0,0,0]): '68000',
+	tuple([0,1,9,162]): '68002',
+	tuple([0,0,0,0,0,1,9,162]): '68002',
+	tuple([162,9,1,0]): '68002',
+	#tuple([162,9,1,0,0,0,0,0]): '68002',
+	tuple([0,1,9,163]): '68003',
+	tuple([0,0,0,0,0,1,9,163]): '68003',
+	tuple([163,9,1,0]): '68003',
+	#tuple([163,9,1,0,0,0,0,0]): '68003',
+	tuple([0,1,9,164]): '68004',
+	tuple([0,0,0,0,0,1,9,164]): '68004',
+	tuple([164,9,1,0]): '68004',
+	#tuple([164,9,1,0,0,0,0]): '68004',
+	tuple([0,1,9,179]): '68019',
+	tuple([179,9,1,0]): '68019',
+	tuple([0,1,9,181]): '68021',
+	tuple([181,9,1,0]): '68021',
+	tuple([0,1,11,181]): '68533',
+	tuple([181,11,1,0]): '68533'
+}
+
+with open(sys.argv[1], "rb") as file:
+	read_bytes = file.read(8)
+	read_bytes_4=[0 for idx in range(4)]
+	for idx in range(4):
+		read_bytes_4[idx]=read_bytes[idx]
+	tuple_8 = tuple(read_bytes)
+	tuple_4 = tuple(read_bytes_4)
+	result = image_types.get(tuple_4, None)
+	if result:
+		print(result)
+	else:
+		result = image_types.get(tuple_8, None)
+		if result:
+			print(result)
+		else:
+			sys.exit('0')

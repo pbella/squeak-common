@@ -1,0 +1,11 @@
+squeak-common - common files to all VM variants and Linux-specific files
+squeak-vm - binaries for the classic VM
+opensmalltalk-vm - binaries for the spur VM on the current architecture able to run 6521 images (on 32-bit architectures) or 68021 images (on 64-bit architectures)
+
+On 64-bit architectures, it is possible to utilize the multiarch capability to also install a compatible 32-bit VM to allow for running the widest variety of Squeak images.  For example, on an amd64 system in addtion to installing the amd64 version of the opensmalltalk-vm package you can also install the i386 version of it via:
+
+dpkg --add-architecture i386
+apt update
+apt install opensmalltalk-vm:i386
+
+Note: this will require approximately 200MB of disk space for ~100 additional i386 support packages.

@@ -1,0 +1,20 @@
+Source: squeak-common
+Section: interpreters
+Priority: optional
+Maintainer: Phil Bellalouna <phil.bellalouna@gmail.com>
+Build-Depends: debhelper (>=11)
+Standards-Version: 4.1.3
+Homepage: https://squeak.org
+
+Package: squeak-common
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ python3,
+Conflicts:
+ squeak-vm
+Description: Files common to all Squeak VMs
+ This package includes files used by all Squeak VM variants
+ (squeak-vm and opensmalltalk-vm)

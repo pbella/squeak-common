@@ -1,0 +1,7 @@
+The VM(s) you need to install will vary depending both on the architecture you are running on as well as the image formats you wish to run.  The image formats supported by the various VM packages are as follows:
+
+squeak-vm - 650[2|4|5] (legacy 32-bit 'classic' images)
+opensmalltalk-vm (on 32-bit systems) - 6521 (32-bit spur images)
+opensmalltalk-vm (on 64-bit systems) - 68021 (64-bit spur images)
+
+On 64-bit systems, one can also run 6521 spur images by installing opensmalltalk-vm for the 32-bit architecture via multiarch support.  This will require your system to install a variety of 32-bit support libraries.
